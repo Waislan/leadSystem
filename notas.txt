@@ -1,0 +1,14 @@
+login.php
+
+- ajax
+
+cadastrar.php
+
+- utf8 no banco
+
+index.php
+
+- ajustar tabela
+
+
+*tela gerenciar administradores

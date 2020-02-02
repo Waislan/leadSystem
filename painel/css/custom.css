@@ -1,0 +1,8 @@
+.btnForm {
+    display: inline-block;
+}
+
+.btnForm button {
+    border: none;
+    background-color: inherit;
+}
