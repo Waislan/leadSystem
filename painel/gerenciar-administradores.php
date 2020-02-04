@@ -10,35 +10,7 @@
         !isset($_SESSION['adminMaster'])) {
             header("Location: login.php"); 
     } else {
-        include_once("../conexao.php");
-
-        $conn = mysqli_connect("localhost", "root", "", "leadsystem_db");
-
-        if (isset($_POST["import"])) {
-
-            $fileName = $_FILES["file"]["tmp_name"];
-            $data = date("Y-m-d");
-
-            if ($_FILES["file"]["size"] > 0) {
-
-                $file = fopen($fileName, "r");
-
-                while (($column = fgetcsv($file, 10000, ",")) !== FALSE) {
-                    $sqlInsert = "INSERT INTO pesquisas (nome_usuario, email_usuario, telefone_usuario, cep, endereco, numero, bairro, cidade, data, viavel)
-                        VALUES ('" .$column[0]. "', '" .$column[1]. "', '" .$column[2]. "', '" .$column[3]. "', '" .$column[4]. "',
-                        '" .$column[5]. "', '" .$column[6]. "', '" .$column[7]. "', '" .$data. "', '" .$column[8]. "');";
-                    $result = mysqli_query($conn, $sqlInsert);
-
-                    if (!empty($result)) {
-                        $type = "success";
-                        $_SESSION['sucesso'] = "CSV Data Imported into the Database";
-                    } else {
-                        $type = "error";
-                        $_session['erro'] = "Problem in Importing CSV Data";
-                    }
-                }
-            }
-        }
+        
 ?>
 
 <!DOCTYPE html>
@@ -89,8 +61,8 @@
         </div>
         <div class="divider"></div>
         <ul class="nav menu">
-            <li class="active"><a href="index.php"><em class="fa fa-eye">&nbsp;</em> Histórico de acessos</a></li>
-            <li><a href="gerenciar-administradores.php"><em class="fa fa-users">&nbsp;</em> Gerenciar administradores</a></li>
+            <li><a href="index.php"><em class="fa fa-eye">&nbsp;</em> Histórico de acessos</a></li>
+            <li class="active"><a href="gerenciar-administradores.php"><em class="fa fa-users">&nbsp;</em> Gerenciar administradores</a></li>
             <li><a href="gerenciar-campos.php"><em class="fa fa-users">&nbsp;</em> Gerenciar campos obrigatórios</a></li>
             <li><a href="gerenciar-redirecionamento.php"><em class="fa fa-users-cog">&nbsp;</em> Gerenciar redirecionamento</a></li>
             <li><a href="gerenciar-ceps.php"><em class="fa fa-users-cog">&nbsp;</em> Gerenciar CEP's</a></li>
@@ -104,13 +76,13 @@
                 <li><a href="index.php">
                         <em class="fa fa-home"></em>
                     </a></li>
-                <li class="active">Histórico de acessos</li>
+                <li class="active">Gerenciar administradores</li>
             </ol>
         </div>
 
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Histórico de acessos</h1>
+                <h1 class="page-header">Administradores cadastrados</h1>
             </div>
         </div>
 
@@ -119,16 +91,16 @@
                 <div class="col-xs-6 no-padding">
                     <div class="panel panel-teal panel-widget border-right">
                         <div class="row no-padding"><em class="fas fa-check color-blue" style="font-size: 30px;"></em>
-                            <div class="large"><?php if ($result = $conexao->query("SELECT * FROM pesquisas WHERE viavel='1';")) {echo $result->num_rows;} ?></div>
-                            <div class="text-muted">Leads viáveis</div>
+                            <div class="large"><?php if ($result = $conexao->query("SELECT * FROM admin WHERE master_admin='true';")) {echo $result->num_rows;} ?></div>
+                            <div class="text-muted">Contas masters</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-6 no-padding">
                     <div class="panel panel-blue panel-widget">
                         <div class="row no-padding"><em class="fas fa-times color-red" style="font-size: 30px;"></em>
-                            <div class="large"><?php if ($result = $conexao->query("SELECT * FROM pesquisas WHERE viavel='0';")) {echo $result->num_rows;} ?></div>
-                            <div class="text-muted">Leads não viáveis</div>
+                            <div class="large"><?php if ($result = $conexao->query("SELECT * FROM admin WHERE master_admin='false';")) {echo $result->num_rows;} ?></div>
+                            <div class="text-muted">Contas comuns</div>
                         </div>
                     </div>
                 </div>
@@ -140,20 +112,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading" style="min-height: 60px; height: auto;">
                         <div class="col-12 col-sm-12 col-md-6">
-                            Acessos
-                        </div>
-                        <div class="col-12 col-sm-12 col-md-6" style="display: flex; justify-content: end; align-items: center;">
-                            <label for="data" style="font-size: 15px;">Filtre por data</label>
-
-                            <input class="form-control" id="data" name="data" type="date" style="width: 150px; margin-left: 10px; display: inline !important;">
-
-                            <form class="form-row" id="formExport" action="php/exportar-pesquisas.php" method="POST" name="download_excel" enctype="multipart/form-data">
-                                <input class="form-control" id="data2" name="data2" type="hidden">
-                                <span class="input-group-btn">
-                                    <button id="btnSearch" name="btnSearch" class="btn btn-default" type="button" style="margin-left: 3px;"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                                    <button id="exportar" name="exportar" class="btn btn-default" type="submit"><span class="glyphicon glyphicon-download-alt" aria-hidden="true" value="Exportar"></span></button>
-                                </span>
-                            </form>
+                            Registros
                         </div>
                     </div>
                     <div class="panel-body">
@@ -162,27 +121,25 @@
                                 <thead>
                                     <tr>
                                         <th class="col-lg-3">ID</th>
-                                        <th class="col-lg-3">CEP</th>
-                                        <th class="col-lg-3">Bairro</th>
-                                        <th class="col-lg-3">Cidade</th>
-                                        <th class="col-lg-3">Data</th>
-                                        <th class="col-lg-3">Viável / Não viável</th>
+                                        <th class="col-lg-3">Nome</th>
+                                        <th class="col-lg-3">Login</th>
+                                        <th class="col-lg-3">Email</th>
+                                        <th class="col-lg-3">Tipo de conta</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                        $result = $conexao->query("SELECT * FROM pesquisas;");
+                                        $result = $conexao->query("SELECT * FROM admin;");
                                         while ($linha = $result->fetch_assoc()) {
                                             echo '<tr>';
-                                            echo '<td>'.$linha['id_pesquisa'].'</td> ';
-                                            echo '<td>'.$linha['cep'].'</td> ';
-                                            echo '<td>'.$linha['bairro'].'</td>';
-                                            echo '<td>'.$linha['cidade'].'</td>';
-                                            echo '<td>'.$linha['data'].'</td>';
-                                            if ($linha['viavel']){
-                                                echo '<td style="text-align: center !important;">Sim</td>';
+                                            echo '<td>'.$linha['id_admin'].'</td> ';
+                                            echo '<td>'.$linha['nome_admin'].'</td> ';
+                                            echo '<td>'.$linha['login_admin'].'</td>';
+                                            echo '<td>'.$linha['email_admin'].'</td>';
+                                            if ($linha['master_admin'] == 'true'){
+                                                echo '<td style="text-align: center !important;">Master</td>';
                                             } else {
-                                                echo '<td style="text-align: center !important;">Não</td>';
+                                                echo '<td style="text-align: center !important;">Comum</td>';
                                             }
                                             echo '</tr>';
                                         }
@@ -191,25 +148,11 @@
                             </table>
                         </div>
                     </div>
-                    <div class="panel-footer" style="min-height: 60px; height: auto;">
-                        <div class="col-sm-12 col-md-6"></div>
-                        <div class="col-sm-12 col-md-6" style="display: flex; justify-content: end; align-items: center;">
-                            <label style="margin-right: 50px;">Importe em CSV</label>
-                            <form style="margin-left: 10px;" action="" method="POST" name="frmCSVImport" id="frmCSVImport" enctype="multipart/form-data">
-                                <label id="labelImport" class="btn btn-default" type="button" for="file">Procurar</label>
-                                <input style="display: none;" class="btn" type="file" name="file" id="file" accept=".csv">
-
-                                <button class="btn btn-default" type="submit" id="import" name="import" class="btn-submit">Importar</button>
-                            </form>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
-        <!--/.row-->
 
     </div>
-    <!--/.main-->
 
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="../js/mdb.js"></script>
@@ -219,11 +162,11 @@
     <script type="text/javascript" src="js/easypiechart-data.js"></script>
     <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
 
-    <!-- JQUERY SCRIPTS -->
+    <!-- JQuery scripts -->
     <script type="script/javascript" src="../js/jquery-3.3.1.min.js"></script>
-    <!-- BOOTSTRAP SCRIPTS -->
+    <!-- Bootstrap scripts -->
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <!-- CUSTOM SCRIPTS -->
+    <!-- Custom scripts -->
     <script type="script/javascript" src="assets/js/custom.js"></script>
 
     <!-- Arquivos para o dataTables -->

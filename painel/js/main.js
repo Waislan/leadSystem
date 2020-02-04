@@ -1,15 +1,16 @@
-$(document).ready(function () {
+$(document).ready(function(){
 
-    $('#formCadastro').validate({
+    $('#formCadastro, #formLogin').validate({
         messages: {
             inputNome: 'Informe o nome do usuário',
             inputLogin: 'Informe um login para o usuário',
             inputEmail: 'Informe o email do usuário',
-            inputSenha: 'Crie uma senha'
+            inputSenha: 'Crie uma senha',
         }
     });
 
-    $('#btnCadastrar').on('click', function () {
+    $('#btnCadastrar, #btnEntrar').on('click', function () {
+        console.log("oi");
         $('#alertNomeInvalido').attr('hidden', true);
         $('#alertLoginInvalido').attr('hidden', true);
         $('#alertEmailInvalido').attr('hidden', true);
@@ -43,8 +44,7 @@ $(document).ready(function () {
                         alert('Ops, parece que já possuímos um cadastro com esse endereço de email!');
                         break;
                     default:
-                        alert('Ops, houve um problema! Por favor, contate o administrador.');
-                        break;
+                        alert('Ops, houve um problema! Por favor, contate o administrador.')
                 }
             });
         } else {

@@ -12,10 +12,6 @@ session_start();
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/datepicker3.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
-    <!--[if lt IE 9]>
-	<script src="js/html5shiv.js"></script>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
 </head>
 
 <body style="background-image: url(img/background.png);">
@@ -24,21 +20,18 @@ session_start();
             <div class="login-panel panel panel-default">
                 <div class="panel-heading">Informe os dados do usuário</div>
                 <div class="panel-body">
-                    <!-- Default form register -->
                     <form id="formCadastro" class="text-center border border-light p-5">
 
                         <p class="h4 mb-4">Cadastro</p>
 
                         <div class="form-row mb-4">
                             <div class="col">
-                                <!-- First name -->
                                 <input type="text" id="inputNome" name="inputNome" class="form-control" placeholder="Nome completo" required>
                                 <small id="alertNomeInvalido" class="form-text text-muted mb-4" hidden>
                                     Por favor, digite um nome válido.
                                 </small>
                             </div>
                             <div class="col">
-                                <!-- Last name -->
                                 <input type="text" id="inputLogin" name="inputLogin" class="form-control" placeholder="Login" required>
                                 <small id="alertLoginInvalido" class="form-text text-muted mb-4" hidden>
                                     Por favor, digite um login.
@@ -46,13 +39,11 @@ session_start();
                             </div>
                         </div>
 
-                        <!-- E-mail -->
                         <input type="email" id="inputEmail" name="inputEmail" class="form-control mb-4" placeholder="Email" required>
                         <small id="alertEmailInvalido" class="form-text text-muted mb-4" hidden>
                             Por favor, digite um email válido.
                         </small>
 
-                        <!-- Password -->
                         <input type="password" id="inputSenha" name="inputSenha" class="form-control" placeholder="Senha" aria-describedby="defaultRegisterFormPasswordHelpBlock" required>
                         <small id="alertSenhaInvalida" class="form-text text-muted mb-4" hidden>
                             Por favor, digite uma senha válida.
@@ -61,7 +52,6 @@ session_start();
                             Mínimo de 8 caracteres e 1 dígito
                         </small>
 
-                        <!-- Phone number -->
                         <input type="text" id="inputEmailRecuperacao" name="inputEmailRecuperacao" class="form-control" placeholder="Email para recuperação" aria-describedby="defaultRegisterFormPhoneHelpBlock">
                         <small class="form-text text-muted mb-4">
                             Opcional
@@ -87,21 +77,21 @@ session_start();
                         </div>
                         <hr>
 
-                        <!-- Terms of service -->
                         <p>Clicando em
                             <em>cadastrar</em> você aceita com nossos
                             <a href="" target="_blank">termos de serviços</a>
 
                     </form>
-                    <!-- Default form register -->
                 </div>
             </div>
-        </div><!-- /.col-->
-    </div><!-- /.row -->
+        </div>
+    </div>
 
     <script src="js/jquery-1.11.1.min.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+
+    <!-- Funções -->
     <script src="js/cadastrar.js"></script>
 </body>
 

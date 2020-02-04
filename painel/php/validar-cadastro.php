@@ -3,7 +3,7 @@
 
     $dados = $_POST['data'];
 
-    $query = "SELECT * FROM admin WHERE email_admin='$dados[0]';";
+    $query = "SELECT * FROM admin WHERE email_admin='$dados[0]' AND senha_admin=MD5('$dados[1]');";
 
     if ($result = $conexao->query($query)){
         $resultado = $result->fetch_assoc();

@@ -2,10 +2,12 @@
     session_start();
     include_once("../conexao.php");
 
-    if (($_SESSION['adminId'] == "") ||
-        ($_SESSION['adminNome'] == "") ||
-        ($_SESSION['adminEmail'] == "") ||
-        ($_SESSION['adminSenha'] == "")) {
+    if (!isset($_SESSION['adminId']) ||
+        !isset($_SESSION['adminNome']) ||
+        !isset($_SESSION['adminEmail']) ||
+        !isset($_SESSION['adminSenha']) ||
+        !isset($_SESSION['adminLogin']) ||
+        !isset($_SESSION['adminMaster'])) {
             header("Location: login.php"); 
     } else {
         include_once("../conexao.php");
@@ -97,6 +99,7 @@
         <div class="divider"></div>
         <ul class="nav menu">
             <li><a href="index.php"><em class="fa fa-eye">&nbsp;</em> Histórico de acessos</a></li>
+            <li><a href="gerenciar-administradores.php"><em class="fa fa-users">&nbsp;</em> Gerenciar administradores</a></li>
             <li><a href="gerenciar-campos.php"><em class="fa fa-users">&nbsp;</em> Gerenciar campos obrigatórios</a></li>
             <li><a href="gerenciar-redirecionamento.php"><em class="fa fa-users-cog">&nbsp;</em> Gerenciar redirecionamento</a></li>
             <li class="active"><a href="gerenciar-ceps.php"><em class="fa fa-users-cog">&nbsp;</em> Gerenciar CEP's</a></li>
