@@ -161,12 +161,17 @@
                             <table id="example" name="example" class="display table table-striped table-hover">
                                 <thead>
                                     <tr>
-                                        <th class="col-lg-3">ID</th>
-                                        <th class="col-lg-3">CEP</th>
-                                        <th class="col-lg-3">Bairro</th>
-                                        <th class="col-lg-3">Cidade</th>
-                                        <th class="col-lg-3">Data</th>
-                                        <th class="col-lg-3">Viável / Não viável</th>
+                                        <th class="">ID</th>
+                                        <th class="col-lg-2">Nome do usuário</th>
+                                        <th class="">Email</th>
+                                        <th class="">Telefone</th>
+                                        <th class="">Endereco</th>
+                                        <th class="">Numero</th>
+                                        <th class="">Bairro</th>
+                                        <th class="">Cidade</th>
+                                        <th class="">CEP</th>
+                                        <th class="col-lg-2">Data de Acesso</th>
+                                        <th class="col-lg-2">Lead Viável</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -174,15 +179,20 @@
                                         $result = $conexao->query("SELECT * FROM pesquisas;");
                                         while ($linha = $result->fetch_assoc()) {
                                             echo '<tr>';
-                                            echo '<td>'.$linha['id_pesquisa'].'</td> ';
-                                            echo '<td>'.$linha['cep'].'</td> ';
-                                            echo '<td>'.$linha['bairro'].'</td>';
-                                            echo '<td>'.$linha['cidade'].'</td>';
-                                            echo '<td>'.$linha['data'].'</td>';
+                                            echo '<td class="">'.$linha['id_pesquisa'].'</td> ';
+                                            echo '<td class="col-lg-2">'.$linha['nome_usuario'].'</td> ';
+                                            echo '<td class="">'.$linha['email_usuario'].'</td> ';
+                                            echo '<td class="col-lg-2">'.$linha['telefone_usuario'].'</td> ';
+                                            echo '<td class="col-lg-2">'.$linha['endereco'].'</td> ';
+                                            echo '<td class="">'.$linha['numero'].'</td>';
+                                            echo '<td class="col-lg-2">'.$linha['bairro'].'</td>';
+                                            echo '<td class="col-lg-2">'.$linha['cidade'].'</td>';
+                                            echo '<td class="">'.$linha['cep'].'</td>';
+                                            echo '<td class="col-lg-2">'.$linha['data'].'</td>';
                                             if ($linha['viavel']){
-                                                echo '<td style="text-align: center !important;">Sim</td>';
+                                                echo '<td class="">Sim</td>';
                                             } else {
-                                                echo '<td style="text-align: center !important;">Não</td>';
+                                                echo '<td class="">Não</td>';
                                             }
                                             echo '</tr>';
                                         }

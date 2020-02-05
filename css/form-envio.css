@@ -1,0 +1,10 @@
+.custom-file-input:lang(en) ~ .custom-file-label::after {
+    content: "Procurar...";
+}
+
+.input-group>.input-group-prepend {
+    flex: 0 0 20%;
+}
+.input-group .input-group-text {
+    width: 100%;
+}

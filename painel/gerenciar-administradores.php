@@ -76,34 +76,13 @@
                 <li><a href="index.php">
                         <em class="fa fa-home"></em>
                     </a></li>
-                <li class="active">Gerenciar administradores</li>
+                <li class="active">Gerenciar usuários</li>
             </ol>
         </div>
 
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Administradores cadastrados</h1>
-            </div>
-        </div>
-
-        <div class="panel panel-container">
-            <div class="row">
-                <div class="col-xs-6 no-padding">
-                    <div class="panel panel-teal panel-widget border-right">
-                        <div class="row no-padding"><em class="fas fa-check color-blue" style="font-size: 30px;"></em>
-                            <div class="large"><?php if ($result = $conexao->query("SELECT * FROM admin WHERE master_admin='true';")) {echo $result->num_rows;} ?></div>
-                            <div class="text-muted">Contas masters</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6 no-padding">
-                    <div class="panel panel-blue panel-widget">
-                        <div class="row no-padding"><em class="fas fa-times color-red" style="font-size: 30px;"></em>
-                            <div class="large"><?php if ($result = $conexao->query("SELECT * FROM admin WHERE master_admin='false';")) {echo $result->num_rows;} ?></div>
-                            <div class="text-muted">Contas comuns</div>
-                        </div>
-                    </div>
-                </div>
+                <h1 class="page-header">Usuários cadastrados</h1>
             </div>
         </div>
 
@@ -112,7 +91,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading" style="min-height: 60px; height: auto;">
                         <div class="col-12 col-sm-12 col-md-6">
-                            Registros
+                            Lista de usuários
                         </div>
                     </div>
                     <div class="panel-body">
@@ -120,11 +99,11 @@
                             <table id="example" name="example" class="display table table-striped table-hover">
                                 <thead>
                                     <tr>
-                                        <th class="col-lg-3">ID</th>
-                                        <th class="col-lg-3">Nome</th>
-                                        <th class="col-lg-3">Login</th>
-                                        <th class="col-lg-3">Email</th>
-                                        <th class="col-lg-3">Tipo de conta</th>
+                                        <th class="col-lg-1">ID</th>
+                                        <th class="col-lg-2">Nome</th>
+                                        <th class="col-lg-2">Login</th>
+                                        <th class="col-lg-4">Email</th>
+                                        <th class="col-lg-3">Tipo de usuário</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -132,14 +111,14 @@
                                         $result = $conexao->query("SELECT * FROM admin;");
                                         while ($linha = $result->fetch_assoc()) {
                                             echo '<tr>';
-                                            echo '<td>'.$linha['id_admin'].'</td> ';
-                                            echo '<td>'.$linha['nome_admin'].'</td> ';
-                                            echo '<td>'.$linha['login_admin'].'</td>';
-                                            echo '<td>'.$linha['email_admin'].'</td>';
+                                            echo '<td class="col-lg-1">'.$linha['id_admin'].'</td> ';
+                                            echo '<td class="col-lg-2">'.$linha['nome_admin'].'</td> ';
+                                            echo '<td class="col-lg-2">'.$linha['login_admin'].'</td>';
+                                            echo '<td class="col-lg-4">'.$linha['email_admin'].'</td>';
                                             if ($linha['master_admin'] == 'true'){
-                                                echo '<td style="text-align: center !important;">Master</td>';
+                                                echo '<td class="col-lg-3">Master</td>';
                                             } else {
-                                                echo '<td style="text-align: center !important;">Comum</td>';
+                                                echo '<td class="col-lg-3">Comum</td>';
                                             }
                                             echo '</tr>';
                                         }

@@ -1,12 +1,1 @@
-cadastrar.php
-
-- utf8 no banco
-
-index.php
-
-- ajustar tabela
-
-
-gerenciar-administradores
-
-- dataTables
+* ícones	
