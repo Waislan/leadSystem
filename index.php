@@ -37,30 +37,59 @@ include_once("conexao.php");
             <div class="form-group">
                 <label for="inputNome">Nome</label>
                 <input type="text" class="form-control" id="inputNome" name="inputNome">
-                
+                <div class="row" style="display: flex; justify-content: initial;">
+                    <small id="alertNomeInvalido" name="alertNomeInvalido" style="color: red;">Digite um nome válido.</small>
+                </div>
+
                 <label for="inputEmail">Email</label>
-                <input type="email" class="form-control" id="inputEmail" name="inputEmail" aria-describedby="emailHelp" placeholder="email@exemplo.com">
+                <input type="text" class="form-control" id="inputEmail" name="inputEmail" aria-describedby="emailHelp" placeholder="email@exemplo.com">
+                <div class="row" style="display: flex; justify-content: initial;">
+                    <small id="alertEmailInvalido" name="alertEmailInvalido" style="color: red;">Digite um email válido.</small>
+                </div>
                 <small id="emailHelp" class="form-text text-muted">Nunca vamos compartilhar seu email, com ninguém.</small>
 
                 <label for="inputTelefone">Telefone</label>
                 <input type="text" class="form-control" id="inputTelefone" name="inputTelefone" placeholder="(99) 99999-9999">
+                <div class="row" style="display: flex; justify-content: initial;">
+                    <small id="alertTelefoneInvalido" name="alertTelefoneInvalido" style="color: red;">Digite um telefone válido.</small>
+                </div>
 
                 <label for="inputCep">CEP</label>
                 <input type="text" class="form-control" id="inputCep" name="inputCep" placeholder="99999-999">
+                <div class="row" style="display: flex; justify-content: initial;">
+                    <small id="alertCepInvalido" name="alertCepInvalido" style="color: red;">Digite um CEP válido.</small>
+                </div>
+
                 <label for="inputEndereco">Endereço</label>
                 <input type="text" class="form-control" id="inputEndereco" name="inputEndereco">
+                <div class="row" style="display: flex; justify-content: initial;">
+                    <small id="alertEnderecoInvalido" name="alertEnderecoInvalido" style="color: red;">Digite um endereço válido.</small>
+                </div>
 
                 <label for="inputNumero">Número</label>
                 <input maxlength="10" type="text" class="form-control" id="inputNumero" name="inputNumero">
+                <div class="row" style="display: flex; justify-content: initial;">
+                    <small id="alertNumeroInvalido" name="alertNumeroInvalido" style="color: red;">Digite um número válido.</small>
+                </div>
 
                 <label for="inputBairro">Bairro</label>
                 <input type="text" class="form-control" id="inputBairro" name="inputBairro">
+                <div class="row" style="display: flex; justify-content: initial;">
+                    <small id="alertBairroInvalido" name="alertBairroInvalido" style="color: red;">Digite um bairro válido.</small>
+                </div>
 
                 <label for="inputCidade">Cidade</label>
                 <input type="text" class="form-control" id="inputCidade" name="inputCidade">
+                <div class="row" style="display: flex; justify-content: initial;">
+                    <small id="alertCidadeInvalido" name="alertCidadeInvalido" style="color: red;">Digite uma cidade válida.</small>
+                </div>
+
+                <div class="row" style="display: flex; justify-content: initial;">
+                    <small id="alertCamposVazios" name="alertCamposVazios" style="color: red;">Você não pode prosseguir com todos os campos vazios.</small>
+                </div>
 
                 <div class="row" style="display: flex; justify-content: end;">
-                    <button type="submit" class="btn btn-primary">Procurar</button>
+                    <button id="btnProcurar" name="btnProcurar" type="submit" class="btn btn-primary">Procurar</button>
                 </div>
             </div>
         </form>

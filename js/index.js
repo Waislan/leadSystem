@@ -1,6 +1,16 @@
-$(document).ready(function(){
+$(document).ready(function () {
+    $('#alertCamposVazios').attr('hidden', true);
+    $('#alertNomeInvalido').attr('hidden', true);
+    $('#alertEmailInvalido').attr('hidden', true);
+    $('#alertTelefoneInvalido').attr('hidden', true);
+    $('#alertCepInvalido').attr('hidden', true);
+    $('#alertEnderecoInvalido').attr('hidden', true);
+    $('#alertNumeroInvalido').attr('hidden', true);
+    $('#alertBairroInvalido').attr('hidden', true);
+    $('#alertCidadeInvalido').attr('hidden', true);
 
-    $.post('php/select-campos.php', function(retorno){
+
+    $.post('php/select-campos.php', function (retorno) {
         var registros = jQuery.parseJSON(retorno);
 
         if (registros[0].nome == '1')
@@ -20,48 +30,48 @@ $(document).ready(function(){
         if (registros[0].cidade == '1')
             $('#inputCidade').prop('required', 'true');
     })
-    
-    $("#inputNome").focusout(function (e) {
-        if (!validaNome($(e.target).val()) && $("#inputNome").prop('required')) {
+
+    $('#inputNome').focusout(function (e) {
+        if (!validaNome($(e.target).val()) && $('#inputNome').prop('required')) {
             $(e.target).addClass('form-invalido');
-            tooltip($(e.target), 'Digite um nome.');
+            //tooltip($(e.target), 'Digite um nome.');
         } else {
             $(e.target).removeClass('form-invalido');
-            $(e.target).tooltip('disable');
+            //$(e.target).tooltip('disable');
         }
     });
-    
+
     function validaNome(nome) {
         var illegalChars = /[\(\)\<\>\,\;\:\\\/\"\[\]]/;
 
-        if (nome.match(illegalChars) || nome == '') {
+        if ((nome == '' && $('#inputNome').prop('required')) || nome.match(illegalChars)) {
             return false;
         } else {
             return true;
         }
     }
-    
-    $("#inputEmail").focusout(function (e) {
-        if (!validaEmail($(e.target).val())) {
+
+    $('#inputEmail').focusout(function (e) {
+        if (!validaEmail($(e.target).val()) && $('#inputEmail').prop('required')) {
             $(e.target).addClass('form-invalido');
-            tooltip($(e.target), 'Digite um email válido.');
+            //tooltip($(e.target), 'Digite um email válido.');
         } else {
             $(e.target).removeClass('form-invalido');
-            $(e.target).tooltip('disable');
+            //$(e.target).tooltip('disable');
         }
     });
-    
+
     function validaEmail(email) {
         var emailFilter = /^.+@.+\..{2,}$/;
         var illegalChars = /[\(\)\<\>\,\;\:\\\/\"\[\]]/;
 
-        if (!(emailFilter.test(email)) || email.match(illegalChars)) {
+        if ((!emailFilter.test(email) && $('#inputEmail').prop('required')) || email.match(illegalChars)) {
             return false;
         } else {
             return true;
         }
     }
-    
+
     $('#inputTelefone').mask("(00) 00000-0000")
         .focusin(function (event) {
             var target, phone, element;
@@ -81,23 +91,32 @@ $(document).ready(function(){
             } else {
                 element.mask("(00) 0000-0000");
             }
-            if (!validaTelefone(phone)) {
+            if (!validaTelefone(phone) && $('#inputTelefone').prop('required')) {
                 $(target).addClass('form-invalido');
-                tooltip($(target), 'Digite um telefone válido.');
+                //($(target), 'Digite um telefone válido.');
             } else {
                 $(target).removeClass('form-invalido');
-                $(target).tooltip('disable');
+                //$(target).tooltip('disable');
             }
         });
-    
+
     function validaTelefone(telefone) {
         var numeroTelefone = telefone.replace(/[^0-9]/g, '');
-        if (numeroTelefone.length < 10) {
-            return false;
+
+        if ($('#inputTelefone').prop('required')){
+            if (numeroTelefone.length < 10) {
+                return false;
+            }
+            return true;
+        } else {
+            if (numeroTelefone.length < 10 && numeroTelefone != '') {
+                return false;
+            }
+            return true;
         }
-        return true;
+        
     }
-    
+
     $('#inputCep').mask('00000-000').focusout(function (e) {
         var campoCidade = $('#inputCidade');
         var campoBairro = $('#inputBairro');
@@ -109,26 +128,26 @@ $(document).ready(function(){
         campoCidade.val('...');
 
         pesquisaCep($(e.target).val(), function (dados) {
-            if (dados.erro) {
+            if ((dados.erro || $('#inputCep').val() == '') && $('#inputCep').prop('required')) {
                 campoEndereco.val('');
                 campoBairro.val('');
                 campoCidade.val('');
 
                 $(e.target).addClass('form-invalido');
-                tooltip($(e.target), 'Digite um CEP válido.');
+                //tooltip($(e.target), 'Digite um CEP válido.');
             } else {
                 campoEndereco.val(dados.logradouro);
                 campoBairro.val(dados.bairro);
                 campoCidade.val(dados.localidade);
 
                 $(e.target).removeClass('form-invalido');
-                $(e.target).tooltip('disable');
+                //$(e.target).tooltip('disable');
 
                 campoNumero.focus();
             }
         });
     });
-    
+
     function pesquisaCep(cep, callback) {
         cep = cep.replace(/\D/g, '');
 
@@ -138,7 +157,6 @@ $(document).ready(function(){
             });
         } else {
             $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
-
                 if (!("erro" in dados)) {
                     callback(dados); // dados possui dados.logradouro, dados.bairro, dados.localidade, dados.uf e dados.ibge
                 } else {
@@ -149,17 +167,17 @@ $(document).ready(function(){
             });
         }
     }
-    
-    $("inputEndereco").focusout(function (e) {
-        if (!validaCampoVazio($(e.target).val()) && $("inputEndereco]").prop('required')) {
+
+    $("#inputEndereco").focusout(function (e) {
+        if (!validaCampoVazio($(e.target).val()) && $("inputEndereco").prop('required')) {
             $(e.target).addClass('form-invalido');
-            tooltip($(e.target), 'Digite um endereço.');
+            //tooltip($(e.target), 'Digite um endereço.');
         } else {
             $(e.target).removeClass('form-invalido');
-            $(e.target).tooltip('disable');
+            //$(e.target).tooltip('disable');
         }
     });
-    
+
     function validaCampoVazio(valor) {
         if (valor == '') {
             return false;
@@ -167,34 +185,107 @@ $(document).ready(function(){
             return true;
         }
     }
-    
-    $("inputNumero").focusout(function (e) {
+
+    $("#inputNumero").focusout(function (e) {
         if (!validaCampoVazio($(e.target).val()) && $("inputNumero").prop('required')) {
             $(e.target).addClass('form-invalido');
-            tooltip($(e.target), 'Digite um número.');
+            //tooltip($(e.target), 'Digite um número.');
         } else {
             $(e.target).removeClass('form-invalido');
-            $(e.target).tooltip('disable');
+            //$(e.target).tooltip('disable');
         }
     });
-    
-    $("inputBairro").focusout(function (e) {
+
+    $("#inputBairro").focusout(function (e) {
         if (!validaCampoVazio($(e.target).val()) && $("inputBairro").prop('required')) {
             $(e.target).addClass('form-invalido');
-            tooltip($(e.target), 'Digite um bairro.');
+            //tooltip($(e.target), 'Digite um bairro.');
         } else {
             $(e.target).removeClass('form-invalido');
-            $(e.target).tooltip('disable');
+            //$(e.target).tooltip('disable');
         }
     });
-    
-    $("inputCidade").focusout(function (e) {
+
+    $("#inputCidade").focusout(function (e) {
         if (!validaCampoVazio($(e.target).val()) && $("inputCidade").prop('required')) {
             $(e.target).addClass('form-invalido');
-            tooltip($(e.target), 'Digite uma cidade.');
+            //tooltip($(e.target), 'Digite uma cidade.');
         } else {
             $(e.target).removeClass('form-invalido');
-            $(e.target).tooltip('disable');
+            //$(e.target).tooltip('disable');
         }
-    });   
+    });
+
+    $('form').on('submit', function (event) {
+        $('#alertCamposVazios').attr('hidden', true);
+        $('#alertNomeInvalido').attr('hidden', true);
+        $('#alertEmailInvalido').attr('hidden', true);
+        $('#alertTelefoneInvalido').attr('hidden', true);
+        $('#alertCepInvalido').attr('hidden', true);
+        $('#alertEnderecoInvalido').attr('hidden', true);
+        $('#alertNumeroInvalido').attr('hidden', true);
+        $('#alertBairroInvalido').attr('hidden', true);
+        $('#alertCidadeInvalido').attr('hidden', true);
+
+        event.preventDefault();
+
+        var nome = $('#inputNome').val();
+        var email = $('#inputEmail').val();
+        var telefone = $('#inputTelefone').val();
+        var cep = $('#inputCep').val();
+        var endereco = $('#inputEndereco').val();
+        var numero = $('#inputNumero').val();
+        var bairro = $('#inputBairro').val();
+        var cidade = $('#inputCidade').val();
+
+        var checkNome = validaNome(nome);
+        var checkEmail = validaEmail(email);
+        var checkTelefone = validaTelefone(telefone);
+
+        if (nome == '' && email == '' && telefone == '' && cep == '' && endereco == '' && numero == '' && bairro == '' && cidade == '') {
+            $('#alertCamposVazios').attr('hidden', false);
+        }
+        if (!checkNome) {
+            $('#inputNome').addClass('form-invalido');
+            $('#alertNomeInvalido').attr('hidden', false);
+        }
+        if (!checkEmail) {
+            $('#inputEmail').addClass('form-invalido');
+            $('#alertEmailInvalido').attr('hidden', false);
+        }
+        if (!checkTelefone) {
+            $('#inputTelefone').addClass('form-invalido');
+            $('#alertTelefoneInvalido').attr('hidden', false);
+        }
+        if ($('#inputCep').val() != '' || $('#inputCep').prop('required')){
+            pesquisaCep(cep, function (dados) {
+                if (dados.erro) {
+                    $('#inputCep').addClass('form-invalido');
+                    $('#alertCepInvalido').prop('hidden', false);
+                    //tooltip('#inputCep', 'Digite um CEP válido.');
+                } else {
+                    $('#inputCep').removeClass('form-invalido');
+                    //$('#inputCep').tooltip('disable');
+                }
+            });
+        }
+        if (endereco == '' && $('#inputCep').prop('required')) {
+            $('#inputEndereco').addClass('form-invalido');
+            $('#alertEnderecoInvalido').attr('hidden', false);
+        }
+        if (numero == '' && $('#inputNumero').prop('required')) {
+            $('#inputNumero').addClass('form-invalido');
+            $('#alertNumeroInvalido').attr('hidden', false);
+        }
+        if (bairro == '' && $('#inputBairro').prop('required')) {
+            $('#inputBairro').addClass('form-invalido');
+            $('#alertBairroInvalido').attr('hidden', false);
+        }
+        if (cidade == '' && $('#inputCidade').prop('required')) {
+            $('#inputCidade').addClass('form-invalido');
+            $('#alertCidadeInvalido').attr('hidden', false);
+        }
+
+    })
+
 })
