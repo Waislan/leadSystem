@@ -232,58 +232,80 @@ $(document).ready(function () {
         var nome = $('#inputNome').val();
         var email = $('#inputEmail').val();
         var telefone = $('#inputTelefone').val();
-        var cep = $('#inputCep').val();
+        var cep = $('#inputCep').val().replace('-', '');
         var endereco = $('#inputEndereco').val();
         var numero = $('#inputNumero').val();
         var bairro = $('#inputBairro').val();
         var cidade = $('#inputCidade').val();
 
-        var checkNome = validaNome(nome);
-        var checkEmail = validaEmail(email);
-        var checkTelefone = validaTelefone(telefone);
-
-        if (nome == '' && email == '' && telefone == '' && cep == '' && endereco == '' && numero == '' && bairro == '' && cidade == '') {
-            $('#alertCamposVazios').attr('hidden', false);
-        }
-        if (!checkNome) {
+        if (!validaNome(nome)) {
             $('#inputNome').addClass('form-invalido');
             $('#alertNomeInvalido').attr('hidden', false);
-        }
-        if (!checkEmail) {
+        } else if (!validaEmail(email)) {
             $('#inputEmail').addClass('form-invalido');
             $('#alertEmailInvalido').attr('hidden', false);
-        }
-        if (!checkTelefone) {
+        } else if (!validaTelefone(telefone)) {
             $('#inputTelefone').addClass('form-invalido');
             $('#alertTelefoneInvalido').attr('hidden', false);
+        } else if (endereco == '' && $('#inputCep').prop('required')) {
+            $('#inputEndereco').addClass('form-invalido');
+            $('#alertEnderecoInvalido').attr('hidden', false);
+        } else if (numero == '' && $('#inputNumero').prop('required')) {
+            $('#inputNumero').addClass('form-invalido');
+            $('#alertNumeroInvalido').attr('hidden', false);
+        } else if (bairro == '' && $('#inputBairro').prop('required')) {
+            $('#inputBairro').addClass('form-invalido');
+            $('#alertBairroInvalido').attr('hidden', false);
+        } else if (cidade == '' && $('#inputCidade').prop('required')) {
+            $('#inputCidade').addClass('form-invalido');
+            $('#alertCidadeInvalido').attr('hidden', false);
+        } else if (nome == '' && email == '' && telefone == '' && cep == '' && endereco == '' && numero == '' && bairro == '' && cidade == '') {
+            $('#alertCamposVazios').attr('hidden', false);
         }
-        if ($('#inputCep').val() != '' || $('#inputCep').prop('required')){
+        else {
             pesquisaCep(cep, function (dados) {
-                if (dados.erro) {
+                if (dados.erro && ($('#inputCep').val() != '' || $('#inputCep').prop('required'))) {
                     $('#inputCep').addClass('form-invalido');
                     $('#alertCepInvalido').prop('hidden', false);
                     //tooltip('#inputCep', 'Digite um CEP válido.');
                 } else {
                     $('#inputCep').removeClass('form-invalido');
                     //$('#inputCep').tooltip('disable');
+
+                    $.post('php/validar-index.php', {
+                        data: [nome, email, telefone, cep, endereco, numero, bairro, cidade]
+                    }, function(retorno){
+                        console.log(retorno);
+                        switch(retorno){
+                            case 'erro1':
+                                alert('Ops, parece que houve um erro! Por favor, contate o administrador. (1)')
+                                break;
+                            case 'erro2':
+                                alert('Ops, parece que houve um erro! Por favor, contate o administrador. (2)')
+                                break;
+                            case 'erro3':
+                                alert('Ops, parece que houve um erro! Por favor, contate o administrador. (3)')
+                                break;
+                            case 'inviavel':
+                                alert('CEP indisponível no momento. Deseja fazer outra pesquisa?')
+                                break;
+                            case 'success':
+                                $.post('php/get-redirecionamento', function(retorno){
+                                    console.log(retorno);
+                                    if (retorno == 'erro'){
+                                        alert('Ops, parece que houve um erro! Por favor, contate o administrador.');
+                                    } else {
+                                        window.location.replace('http://' + retorno);
+                                    }
+                                })
+                                break;
+                            default:
+                                alert('Ops, parece que houve um erro! Por favor, contate o administrador. (4)')
+                                break;
+                        }
+                    });
                 }
             });
-        }
-        if (endereco == '' && $('#inputCep').prop('required')) {
-            $('#inputEndereco').addClass('form-invalido');
-            $('#alertEnderecoInvalido').attr('hidden', false);
-        }
-        if (numero == '' && $('#inputNumero').prop('required')) {
-            $('#inputNumero').addClass('form-invalido');
-            $('#alertNumeroInvalido').attr('hidden', false);
-        }
-        if (bairro == '' && $('#inputBairro').prop('required')) {
-            $('#inputBairro').addClass('form-invalido');
-            $('#alertBairroInvalido').attr('hidden', false);
-        }
-        if (cidade == '' && $('#inputCidade').prop('required')) {
-            $('#inputCidade').addClass('form-invalido');
-            $('#alertCidadeInvalido').attr('hidden', false);
         }
 
     })

@@ -16,11 +16,9 @@ $(document).ready(function () {
                     alert('Ops, parece que houve um erro! Por favor, contate o administrador. (1)');
                     break;
                 case 'true':
-                    console.log(retorno);
                     window.location.replace("index.php");
                     break;
                 default:
-                    console.log(retorno);
                     alert('Ops, parece que houve um erro! Por favor, contate o administrador. (2)');
                     break;
             }
