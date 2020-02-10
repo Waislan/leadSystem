@@ -73,14 +73,14 @@ session_start();
                             <button style="margin-top: 40px;" id="btnCadastrar" name="btnCadastrar" class="btn btn-info my-4 " type="button">Cadastrar</button>
                         </div>
                         <div class="row" >
-                            <a href="login.php" style="color: black;">Voltar</a>
+                            <a href="index.php" style="color: black;">Voltar</a>
                         </div>
                         <hr>
 
                         <p>Clicando em
                             <em>cadastrar</em> você aceita com nossos
                             <a href="" target="_blank">termos de serviços</a>
-
+                        </p>
                     </form>
                 </div>
             </div>

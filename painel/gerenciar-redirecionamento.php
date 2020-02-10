@@ -34,22 +34,12 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <link href="css/styles.css" rel="stylesheet">
-    <link href="../css/mdb.min.css" rel="stylesheet">
-    <link href="css/custom.css" rel="stylesheet">
 
     <!--Custom Font-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     
     <!-- JQuery -->
     <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    
-    <!-- Funções -->
-    <script type="text/javascript" src="js/gerenciar-redirecionamento.js"></script>
-
-    <!--[if lt IE 9]>
-	<script src="js/html5shiv.js"></script>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
 </head>
 
 <body>
@@ -60,10 +50,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span></button>
-                <a class="navbar-brand" href="#">
-                    <!--<img src="../img/Logo.png">-->Leader <span> ADMIN</span></a>
+                <a class="navbar-brand" href="#">Leader <span> ADMIN</span></a>
             </div>
-        </div><!-- /.container-fluid -->
+        </div>
     </nav>
     <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
         <div class="profile-sidebar">
@@ -77,13 +66,12 @@
         <ul class="nav menu">
             <li><a href="index.php"><em class="fa fa-eye">&nbsp;</em> Histórico de acessos</a></li>
             <li><a href="gerenciar-administradores.php"><em class="fa fa-users">&nbsp;</em> Gerenciar administradores</a></li>
-            <li><a href="gerenciar-campos.php"><em class="fa fa-users">&nbsp;</em> Gerenciar campos obrigatórios</a></li>
-            <li class="active"><a href="gerenciar-redirecionamento.php"><em class="fa fa-users-cog">&nbsp;</em> Gerenciar redirecionamento</a></li>
-            <li><a href="gerenciar-ceps.php"><em class="fa fa-users-cog">&nbsp;</em> Gerenciar CEP's</a></li>
+            <li><a href="gerenciar-campos.php"><em class="fas fa-tasks">&nbsp;</em> Gerenciar campos obrigatórios</a></li>
+            <li class="active"><a href="gerenciar-redirecionamento.php"><em class="fas fa-directions">&nbsp;</em> Gerenciar redirecionamento</a></li>
+            <li><a href="gerenciar-ceps.php"><em class="fas fa-map-marker-alt">&nbsp;</em> Gerenciar CEP's</a></li>
             <li><a href="logout.php"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
         </ul>
     </div>
-    <!--/.sidebar-->
 
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
         <div class="row">
@@ -94,14 +82,12 @@
                 <li class="active">Gerenciar redirecionamento</li>
             </ol>
         </div>
-        <!--/.row-->
 
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">Redirecionamento</h1>
             </div>
         </div>
-        <!--/.row-->
 
         <div class="row">
             <div class="col-md-12">
@@ -128,18 +114,15 @@
                 </div>
             </div>
         </div>
-        <!--/.row-->
-
     </div>
-    <!--/.main-->
 
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="../js/mdb.js"></script>
     <!-- BOOTSTRAP SCRIPTS -->
     <script src="js/bootstrap.min.js"></script>
     
-    
-
+    <!-- Funções -->
+    <script type="text/javascript" src="js/gerenciar-redirecionamento.js"></script> 
 </body>
 
 </html>

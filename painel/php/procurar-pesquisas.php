@@ -21,7 +21,7 @@
                                 "numero" => $resultado['numero'],
                                 "bairro" => $resultado['bairro'],
                                 "cidade" => $resultado['cidade'],
-                                 "date" => $resultado['data'],
+                                "date" => $resultado['data'],
                                 "viabilidade" => $resultado['viavel']);
         }
         echo json_encode(($registros));
