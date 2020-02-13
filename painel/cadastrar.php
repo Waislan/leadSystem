@@ -1,5 +1,16 @@
 <?php
 session_start();
+include_once("../conexao.php");
+
+if (!isset($_SESSION['adminId']) ||
+    !isset($_SESSION['adminNome']) ||
+    !isset($_SESSION['adminEmail']) ||
+    !isset($_SESSION['adminSenha']) ||
+    !isset($_SESSION['adminLogin']) ||
+    !isset($_SESSION['adminMaster']) ||
+    $_SESSION['adminMaster'] == 'false') {
+    header("Location: login.php");
+} else {
 ?>
 
 <!DOCTYPE html>
@@ -98,6 +109,6 @@ session_start();
 </html>
 
 <?php
-//    }
+    }
 
 ?>

@@ -12,6 +12,9 @@ session_start();
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/datepicker3.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
+
+    <!-- JQuery -->
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.3.1.js"></script>
 </head>
 
 <body style="background-image: url(img/background.png);">
@@ -42,7 +45,7 @@ session_start();
         </div>
     </div>
 
-    <script src="js/jquery-1.11.1.min.js"></script>
+    <!--<script src="js/jquery-1.11.1.min.js"></script>-->
     <script src="js/bootstrap.min.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
 

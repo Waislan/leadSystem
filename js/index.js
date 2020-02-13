@@ -13,21 +13,21 @@ $(document).ready(function () {
     $.post('php/select-campos.php', function (retorno) {
         var registros = jQuery.parseJSON(retorno);
 
-        if (registros[0].nome == '1')
+        if (registros[0].nome == 'true')
             $('#inputNome').prop('required', 'true');
-        if (registros[0].email == '1')
+        if (registros[0].email == 'true')
             $('#inputEmail').prop('required', 'true');
-        if (registros[0].telefone == '1')
+        if (registros[0].telefone == 'true')
             $('#inputTelefone').prop('required', 'true');
-        if (registros[0].cep == '1')
+        if (registros[0].cep == 'true')
             $('#inputCep').prop('required', 'true');
-        if (registros[0].endereco == '1')
+        if (registros[0].endereco == 'true')
             $('#inputEndereco').prop('required', 'true');
-        if (registros[0].numero == '1')
+        if (registros[0].numero == 'true')
             $('#inputNumero').prop('required', 'true');
-        if (registros[0].bairro == '1')
+        if (registros[0].bairro == 'true')
             $('#inputBairro').prop('required', 'true');
-        if (registros[0].cidade == '1')
+        if (registros[0].cidade == 'true')
             $('#inputCidade').prop('required', 'true');
     })
 
@@ -65,7 +65,7 @@ $(document).ready(function () {
         var emailFilter = /^.+@.+\..{2,}$/;
         var illegalChars = /[\(\)\<\>\,\;\:\\\/\"\[\]]/;
 
-        if ((!emailFilter.test(email) && $('#inputEmail').prop('required')) || email.match(illegalChars)) {
+        if ((!emailFilter.test(email) && $('#inputEmail').prop('required')) || (!emailFilter.test(email) && $('#inputEmail').val() != '') || email.match(illegalChars)) {
             return false;
         } else {
             return true;
@@ -217,6 +217,8 @@ $(document).ready(function () {
     });
 
     $('form').on('submit', function (event) {
+        event.preventDefault();
+
         $('#alertCamposVazios').attr('hidden', true);
         $('#alertNomeInvalido').attr('hidden', true);
         $('#alertEmailInvalido').attr('hidden', true);
@@ -226,8 +228,6 @@ $(document).ready(function () {
         $('#alertNumeroInvalido').attr('hidden', true);
         $('#alertBairroInvalido').attr('hidden', true);
         $('#alertCidadeInvalido').attr('hidden', true);
-
-        event.preventDefault();
 
         var nome = $('#inputNome').val();
         var email = $('#inputEmail').val();
@@ -261,6 +261,14 @@ $(document).ready(function () {
             $('#alertCidadeInvalido').attr('hidden', false);
         } else if (nome == '' && email == '' && telefone == '' && cep == '' && endereco == '' && numero == '' && bairro == '' && cidade == '') {
             $('#alertCamposVazios').attr('hidden', false);
+            $('#inputNome').addClass('form-invalido');
+            $('#inputEmail').addClass('form-invalido');
+            $('#inputTelefone').addClass('form-invalido');
+            $('#inputCep').addClass('form-invalido');
+            $('#inputEndereco').addClass('form-invalido');
+            $('#inputNumero').addClass('form-invalido');
+            $('#inputBairro').addClass('form-invalido');
+            $('#inputCidade').addClass('form-invalido');
         }
         else {
             pesquisaCep(cep, function (dados) {
@@ -276,18 +284,22 @@ $(document).ready(function () {
                         data: [nome, email, telefone, cep, endereco, numero, bairro, cidade]
                     }, function(retorno){
                         console.log(retorno);
+                        
                         switch(retorno){
                             case 'erro1':
-                                alert('Ops, parece que houve um erro! Por favor, contate o administrador. (1)')
+                                alert('Ops, parece que houve um erro! Por favor, contate o administrador. (1)');
                                 break;
                             case 'erro2':
-                                alert('Ops, parece que houve um erro! Por favor, contate o administrador. (2)')
+                                alert('Ops, parece que houve um erro! Por favor, contate o administrador. (2)');
                                 break;
                             case 'erro3':
-                                alert('Ops, parece que houve um erro! Por favor, contate o administrador. (3)')
+                                alert('Ops, parece que houve um erro! Por favor, contate o administrador. (3)');
                                 break;
                             case 'inviavel':
-                                alert('CEP indisponível no momento. Deseja fazer outra pesquisa?')
+                                alert('CEP indisponível no momento. Deseja fazer outra pesquisa?');
+                                break;
+                            case 'invalid':
+                                alert('Você não pode prosseguir sem digitar um CEP!');
                                 break;
                             case 'success':
                                 $.post('php/get-redirecionamento', function(retorno){

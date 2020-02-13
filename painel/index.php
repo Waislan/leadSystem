@@ -2,14 +2,12 @@
 session_start();
 include_once("../conexao.php");
 
-if (
-    !isset($_SESSION['adminId']) ||
+if (!isset($_SESSION['adminId']) ||
     !isset($_SESSION['adminNome']) ||
     !isset($_SESSION['adminEmail']) ||
     !isset($_SESSION['adminSenha']) ||
     !isset($_SESSION['adminLogin']) ||
-    !isset($_SESSION['adminMaster'])
-) {
+    !isset($_SESSION['adminMaster'])) {
     header("Location: login.php");
 } else {
     include_once("../conexao.php");

@@ -43,9 +43,14 @@ $(document).ready(function() {
 
             for (var i = 0; i < registros.length; i++) {
                 var id = registros[i].id_pesquisa;
-                var cep = registros[i].cep;
+                var nome = registros[i].nome;
+                var email = registros[i].email;
+                var telefone = registros[i].telefone;
+                var endereco = registros[i].endereco;
+                var numero = registros[i].numero;
                 var bairro = registros[i].bairro;
                 var cidade = registros[i].cidade;
+                var cep = registros[i].cep;
                 var date = registros[i].date;
                 var viabilidade = registros[i].viabilidade;
                 viabilidade = viabilidade == '1' ? 'Sim' : 'Não';
@@ -53,10 +58,15 @@ $(document).ready(function() {
                 tbody = "<tbody>" +
                     "<tr>" +
                     "<td>" + id + "</td>" +
-                    "<td>" + cep + "</td>" +
+                    "<td>" + nome + "</td>" +
+                    "<td>" + email + "</td>" +
+                    "<td>" + telefone + "</td>" +
+                    "<td>" + endereco + "</td>" +
+                    "<td>" + numero + "</td>" +
                     "<td>" + bairro + "</td>" +
                     "<td>" + cidade + "</td>" +
-                    "<td>" + data + "</td>" +
+                    "<td>" + cep + "</td>" +
+                    "<td>" + date + "</td>" +
                     "<td style=\"text-align: center !important;\">" + viabilidade + "</td>" +
                     "</tr>" +
                     "</tbody>";

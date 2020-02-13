@@ -97,7 +97,7 @@ if (
                             </div>
                             <div class="col-md-6">
                                 <div class="row" style="display: flex; justify-content: flex-end; margin-right: 5px;">
-                                    <a class="btn btn-default waves-effect waves-light" type="button" href="cadastrar.php" title="Cadastrar usuário"><i class="fas fa-user-plus"></i></a>
+                                    <a class="btn btn-default waves-effect waves-light" type="button" title="Cadastrar usuário" id="btnCadastrar"><i class="fas fa-user-plus"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -161,8 +161,7 @@ if (
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
 
         <!-- Funções -->
-        <script type="text/javascript" src="js/index.js"></script>
-
+        <script type="text/javascript" src="js/gerenciar-administradores.js"></script>
     </body>
 
     </html>

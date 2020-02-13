@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+    /*
     $('#formCadastro').validate({
         messages: {
             inputNome: 'Informe o nome do usuário',
@@ -8,7 +8,7 @@ $(document).ready(function () {
             inputSenha: 'Crie uma senha'
         }
     });
-
+    */
     $('#btnCadastrar').on('click', function () {
         $('#alertNomeInvalido').attr('hidden', true);
         $('#alertLoginInvalido').attr('hidden', true);
