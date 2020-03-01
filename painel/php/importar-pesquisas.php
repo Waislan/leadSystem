@@ -1,5 +1,5 @@
 <?php
-    echo "<script>alert('oi')</script>";
+    //echo "<script>alert('oi')</script>";
 
     $conn = mysqli_connect("localhost", "root", "", "leadsystem_db");
 

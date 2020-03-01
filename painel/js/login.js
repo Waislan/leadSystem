@@ -8,7 +8,7 @@ $(document).ready(function () {
         $.post('php/validar-login.php', {
             data: [email, senha]
         }, function (retorno) {
-            console.log(retorno);
+            //console.log(retorno);
             switch(retorno){
                 case 'invalid':
                     $('#alertLoginInvalido').attr('hidden', false);

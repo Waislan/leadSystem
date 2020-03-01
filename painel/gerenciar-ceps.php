@@ -2,18 +2,14 @@
 session_start();
 include_once("../conexao.php");
 
-if (
-    !isset($_SESSION['adminId']) ||
+if (!isset($_SESSION['adminId']) ||
     !isset($_SESSION['adminNome']) ||
     !isset($_SESSION['adminEmail']) ||
     !isset($_SESSION['adminSenha']) ||
     !isset($_SESSION['adminLogin']) ||
-    !isset($_SESSION['adminMaster'])
-) {
+    !isset($_SESSION['adminMaster'])) {
     header("Location: login.php");
 } else {
-    include_once("../conexao.php");
-
     $conn = mysqli_connect("localhost", "root", "", "leadsystem_db");
 
     if (isset($_POST["import"])) {
@@ -26,17 +22,15 @@ if (
             $file = fopen($fileName, "r");
 
             while (($column = fgetcsv($file, 10000, ",")) !== FALSE) {
-                $sqlInsert = "INSERT INTO pesquisas (nome_usuario, email_usuario, telefone_usuario, cep, endereco, numero, bairro, cidade, data, viavel)
-                        VALUES ('" . $column[0] . "', '" . $column[1] . "', '" . $column[2] . "', '" . $column[3] . "', '" . $column[4] . "',
-                        '" . $column[5] . "', '" . $column[6] . "', '" . $column[7] . "', '" . $data . "', '" . $column[8] . "');";
+                $sqlInsert = "INSERT INTO cep (cep) VALUES ('" . $column[0] . "');";
                 $result = mysqli_query($conn, $sqlInsert);
 
                 if (!empty($result)) {
                     $type = "success";
-                    $_SESSION['sucesso'] = "CSV Data Imported into the Database";
+                    $_SESSION['sucesso'] = "Arquivo importado com sucesso!";
                 } else {
                     $type = "error";
-                    $_session['erro'] = "Problem in Importing CSV Data";
+                    $_SESSION['erro'] = "Ops, parece que houve um erro na importação! Verifique se o seu arquivo segue o modelo de importação do sistema ou contacte o administrador.";
                 }
             }
         }
@@ -158,22 +152,7 @@ if (
                         <div class="panel-body">
                             <div class="table-responsive col-md-12">
                                 <table id="dataTable" name="dataTable" class="display table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th class="col-lg-3">ID</th>
-                                            <th class="col-lg-3">CEP</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        while ($linha = $result->fetch_assoc()) {
-                                            echo '<tr>';
-                                            echo '<td>' . $linha['id_cep'] . '</td> ';
-                                            echo '<td>' .substr($linha['cep'], 0, 5). '-' .substr($linha['cep'], 5, 8). '</td> ';
-                                            echo '</tr>';
-                                        }
-                                        ?>
-                                    </tbody>
+                                    
                                 </table>
                             </div>
                         </div>

@@ -4,27 +4,37 @@
     include_once("../../conexao.php");
 
     if ($data != ''){
+        $data = $_POST['data'];
         $query = "SELECT * FROM pesquisas WHERE data='$data' ORDER BY id_pesquisa DESC;";
     } else {
         $query = "SELECT * FROM pesquisas ORDER BY id_pesquisa DESC;";
     }
-    
+        
     if ($result = $conexao->query($query)){
         $registros = array();
+
         while($resultado = $result->fetch_assoc()){
-        	$registros[] = array("id_pesquisa" => $resultado['id_pesquisa'],
-                                "nome" => $resultado['nome_usuario'],
-                                "email" => $resultado['email_usuario'],
-                                "telefone" => $resultado['telefone_usuario'],
-                                "cep" => $resultado['cep'],
-                                "endereco" => $resultado['endereco'],
-                                "numero" => $resultado['numero'],
-                                "bairro" => $resultado['bairro'],
-                                "cidade" => $resultado['cidade'],
-                                "date" => $resultado['data'],
-                                "viabilidade" => $resultado['viavel']);
+            $cep = substr($resultado['cep'], 0, 5) . '-' . substr($resultado['cep'], 5, 8);
+            
+            if ($resultado['viavel'] == '1'){
+                $viavel = 'Sim';
+            } else {
+                $viavel = 'Não';
+            }
+
+        	$registros[] = array($resultado['id_pesquisa'],
+                                $resultado['nome_usuario'],
+                                $resultado['email_usuario'],
+                                $resultado['telefone_usuario'],
+                                $cep,
+                                $resultado['endereco'],
+                                $resultado['numero'],
+                                $resultado['bairro'],
+                                $resultado['cidade'],
+                                $resultado['data'],
+                                $viavel);
         }
-        echo json_encode(($registros));
+        echo json_encode($registros);
     }
     $conexao->close();
 ?>

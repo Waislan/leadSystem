@@ -62,16 +62,17 @@ if (!isset($_SESSION['adminId']) ||
                         <small class="form-text text-muted mb-4">
                             Mínimo de 8 caracteres e 1 dígito
                         </small>
-
+                        <!--
                         <input type="text" id="inputEmailRecuperacao" name="inputEmailRecuperacao" class="form-control" placeholder="Email para recuperação" aria-describedby="defaultRegisterFormPhoneHelpBlock">
                         <small class="form-text text-muted mb-4">
                             Opcional
                         </small>
-
-                        <div class="d-flex justify-content-start">
+                        -->
+                        <div>
                             <input type="checkbox" class="form-check-input" id="checkMaster">
                             <label for="checkMaster">Administrador master</label>
                         </div>
+                        
                         <!-- Newsletter -->
                         <!--
                         <div class="custom-control custom-checkbox">
@@ -87,11 +88,12 @@ if (!isset($_SESSION['adminId']) ||
                             <a href="index.php" style="color: black;">Voltar</a>
                         </div>
                         <hr>
-
+                        <!--
                         <p>Clicando em
                             <em>cadastrar</em> você aceita com nossos
                             <a href="" target="_blank">termos de serviços</a>
                         </p>
+                        -->
                     </form>
                 </div>
             </div>

@@ -10,6 +10,8 @@ if (!isset($_SESSION['adminId']) ||
     !isset($_SESSION['adminMaster'])) {
     header("Location: login.php");
 } else {
+    include_once("../conexao.php");
+
     $conn = mysqli_connect("localhost", "root", "", "leadsystem_db");
 
     if (isset($_POST["import"])) {
@@ -32,7 +34,7 @@ if (!isset($_SESSION['adminId']) ||
                     $_SESSION['sucesso'] = "CSV Data Imported into the Database";
                 } else {
                     $type = "error";
-                    $_SESSION['erro'] = "Problem in Importing CSV Data";
+                    $_session['erro'] = "Problem in Importing CSV Data";
                 }
             }
         }
@@ -205,7 +207,7 @@ if (!isset($_SESSION['adminId']) ||
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
 
         <!-- Funções -->
-        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/teste.js"></script>
     </body>
 
     </html>

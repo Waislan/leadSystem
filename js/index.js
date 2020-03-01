@@ -283,7 +283,7 @@ $(document).ready(function () {
                     $.post('php/validar-index.php', {
                         data: [nome, email, telefone, cep, endereco, numero, bairro, cidade]
                     }, function(retorno){
-                        console.log(retorno);
+                        //console.log(retorno);
                         
                         switch(retorno){
                             case 'erro1':

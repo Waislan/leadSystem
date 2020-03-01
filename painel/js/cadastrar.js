@@ -38,6 +38,7 @@ $(document).ready(function () {
                         break;
                     case 'sucesso':
                         alert('Administrador cadastrado com sucesso!');
+                        window.location.replace("cadastrar.php");
                         break;
                     case 'repeticao':
                         alert('Ops, parece que já possuímos um cadastro com esse endereço de email!');

@@ -1,0 +1,13 @@
+index.php
+- viabilidade mostrar sim/não *
+- hífen nos ceps *
+
+gerenciar-campos.php
+- botão bugado *
+
+gerenciar-ceps.php
+- recarregar tabela quando inserir cep *
+- recarregar tabela quando pesquisar cep em branco *
+- export ignorando zeros a direita
+- import *
+- hífen nos ceps *

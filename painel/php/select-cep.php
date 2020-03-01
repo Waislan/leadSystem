@@ -13,12 +13,12 @@
             $result = $conexao->query($query);
             
             while($resultado = $result->fetch_assoc()){
-        	   $registros[] = array("id_cep" => $resultado['id_cep'], "cep" => $resultado['cep']);
+                $cep = substr($resultado['cep'], 0, 5) . '-' . substr($resultado['cep'], 5, 8);
+        	    $registros[] = array($resultado['id_cep'], $cep);
             }
-            echo json_encode(($registros));
+            echo json_encode($registros);
         }
     } else {
         echo 'erro';
     }
     $conexao->close();
-?>

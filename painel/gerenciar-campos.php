@@ -238,10 +238,10 @@ if (
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="panel-footer" style="min-height: 60px; height: auto;">
-                                    <div class="row" style="display: flex; justify-content: center;">
-                                        <button id="atualizar" name="atualizar" class="btn btn-deafult" type="button">Atualizar</button>
-                                    </div>
+                            </div>
+                            <div class="panel-footer">
+                                <div class="row" style="display: flex; justify-content: center;">
+                                    <button id="atualizar" name="atualizar" class="btn btn-deafult" type="button">Atualizar</button>
                                 </div>
                             </div>
                         </form>
