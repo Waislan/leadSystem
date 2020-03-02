@@ -1,13 +1,17 @@
 index.php
-- viabilidade mostrar sim/não *
-- hífen nos ceps *
+- utf8 em export
+- import pesquisas
 
-gerenciar-campos.php
-- botão bugado *
+gerenciar-redirecionamento.php
+- aviso formato url (www ou sem) *
 
 gerenciar-ceps.php
-- recarregar tabela quando inserir cep *
-- recarregar tabela quando pesquisar cep em branco *
-- export ignorando zeros a direita
-- import *
-- hífen nos ceps *
+- pesquisar cep *
+- conferir import
+
+cadastrar.php
+- tirar email recuperação *
+- tirar termos de serviços *
+- recarregar página após cadastrar *
+
+** UTF8 no banco
