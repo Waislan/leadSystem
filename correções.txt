@@ -1,6 +1,6 @@
 index.php
 - utf8 em export
-- import pesquisas
+- import pesquisas *
 
 gerenciar-redirecionamento.php
 - aviso formato url (www ou sem) *
