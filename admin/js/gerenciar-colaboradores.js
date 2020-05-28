@@ -34,7 +34,7 @@ $(document).ready(function() {
         if ($('#btnCadastrar').attr('disabled')){
             alert('Para acessar esta funcionalidade é necessário ter permisões de usuário master.');
         } else {
-            window.location.replace('cadastrar.php');
+            window.location.replace('novo-colaborador.php');
         }
     });
 });

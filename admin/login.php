@@ -1,5 +1,5 @@
 <?php
-session_start();
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +25,7 @@ session_start();
                 <div class="panel-body">
                     <form id="formLogin">
                         <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Email" id="inputEmail" name="inputEmail" type="email">
+                            <input type="text" class="form-control" placeholder="Username" id="inputUsername" name="inputUsername">
                             <input class="form-control" placeholder="Senha" id="inputSenha" name="inputSenha" type="password">
                             <small id="alertLoginInvalido" class="form-text text-muted mb-4" style="color: red;" hidden>
                                 Usuário ou senha inválidos.

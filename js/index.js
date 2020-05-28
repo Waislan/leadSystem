@@ -302,7 +302,7 @@ $(document).ready(function () {
                                 alert('Você não pode prosseguir sem digitar um CEP!');
                                 break;
                             case 'success':
-                                $.post('php/get-redirecionamento', function(retorno){
+                                $.post('php/get-redirecionamento.php', function(retorno){
                                     console.log(retorno);
                                     if (retorno == 'erro'){
                                         alert('Ops, parece que houve um erro! Por favor, contate o administrador.');

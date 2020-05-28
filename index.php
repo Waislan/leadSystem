@@ -1,7 +1,7 @@
 <?php
-session_start();
+    session_start();
 
-include_once("conexao.php");
+    include_once("conexao.php");
 ?>
 <html lang="en">
 

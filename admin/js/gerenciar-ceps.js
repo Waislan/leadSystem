@@ -63,11 +63,11 @@ $(document).ready(function () {
     $("#btnPesquisarCep").on("click", function () {
         var cep = $("#inputCep").val().replace(/[^0-9]/g, '');
 
-        if (cep == '') {
+        if (cep === '') {
             table.destroy();
             carregarDataTable();
         } else {
-            $.post("php/pesquisar-cep", {
+            $.post("php/pesquisar-cep.php", {
                 data: cep
             }, function (retorno) {
                 if (retorno == 'false') {

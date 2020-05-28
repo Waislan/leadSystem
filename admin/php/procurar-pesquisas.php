@@ -1,10 +1,9 @@
 <?php
-    $data = $_POST["data"] != '' ? $_POST["data"] : '';
-
     include_once("../../conexao.php");
 
+    $data = $_POST["data"] != '' ? $_POST["data"] : '';
+
     if ($data != ''){
-        $data = $_POST['data'];
         $query = "SELECT * FROM pesquisas WHERE data='$data' ORDER BY id_pesquisa DESC;";
     } else {
         $query = "SELECT * FROM pesquisas ORDER BY id_pesquisa DESC;";
@@ -23,14 +22,14 @@
             }
 
         	$registros[] = array($resultado['id_pesquisa'],
-                                $resultado['nome_usuario'],
+                                utf8_decode($resultado['nome_usuario']),
                                 $resultado['email_usuario'],
                                 $resultado['telefone_usuario'],
                                 $cep,
-                                $resultado['endereco'],
+                                utf8_decode($resultado['endereco']),
                                 $resultado['numero'],
-                                $resultado['bairro'],
-                                $resultado['cidade'],
+                                utf8_decode($resultado['bairro']),
+                                utf8_decode($resultado['cidade']),
                                 $resultado['data'],
                                 $viavel);
         }

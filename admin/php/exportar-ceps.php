@@ -1,8 +1,8 @@
 <?php
     $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $db = "leadsystem_db";
+    $username = "u745700149_waislan";
+    $password = "L/NnVWHd";
+    $db = "u745700149_leaderAdmin";
 
     $conn = mysqli_connect($servername, $username, $password, $db);
  

@@ -37,9 +37,19 @@ $(document).ready(function () {
         });
     }
 
+    function tratarData(data){
+        if (data != ''){
+            var auxiliar = data.split('-');
+            var retorno = auxiliar[2] + '-' + auxiliar[1] + '-' + auxiliar[0];
+            return retorno;
+        }
+        return data;
+    }
+
     function carregarDataTable(){
-        var date = $('#data').val();
+        var date = tratarData($('#data').val());
         //console.log(date);
+
         $.post('php/procurar-pesquisas.php', {
             data: date
         }, function (retorno) {

@@ -2,11 +2,11 @@ $(document).ready(function () {
     $('#btnEntrar').on('click', function () {
         $('#alertLoginInvalido').attr('hidden', true);
 
-        var email = $('#inputEmail').val();
+        var username = $('#inputUsername').val();
         var senha = $('#inputSenha').val();
 
         $.post('php/validar-login.php', {
-            data: [email, senha]
+            data: [username, senha]
         }, function (retorno) {
             //console.log(retorno);
             switch(retorno){
